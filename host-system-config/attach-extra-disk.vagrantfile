@@ -3,11 +3,7 @@
 # - disk_name: The name of the file to create for the disk
 # - disk_size_gb: The size of the new disk in GB
 
-if File.exist?(disk_name)
-    disk_already_exists = true
-else
-    disk_already_exists = false
-end
+disk_already_exists = File.exist?(disk_name)
 
 config.vm.provider "virtualbox" do |vb|
     if not disk_already_exists
