@@ -1,6 +1,9 @@
 #!/bin/bash
 
 disk=$1
+
+echo "Formatting and mounting disk: $1"
+
 # o  - clear the in memory partition table
 # n  - new partition
 # p  - primary partition
