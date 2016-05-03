@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 disk=$1
 # o  - clear the in memory partition table
