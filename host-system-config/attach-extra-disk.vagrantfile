@@ -10,9 +10,6 @@ else
 end
 
 config.vm.provider "virtualbox" do |vb|
-    vb.memory = ram * 1024
-    vb.cpus = cpus
-
     if not disk_already_exists
         vb.customize ['createhd',
                       '--filename', disk_name,
