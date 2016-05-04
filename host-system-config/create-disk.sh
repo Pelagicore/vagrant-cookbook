@@ -18,12 +18,13 @@ mkfs.ext4 ${disk}1
 # vagrant tool, w/o this, we can't use "vagrant ssh"
 cp -a /home/vagrant/.ssh /tmp
 
-# Mount the new drive
-mount ${disk}1 /home/vagrant/
+# Re-initialize the home directory
+mount ${disk}1 /home
+
+#Delete 
+cp -r /etc/skel/ /home/vagrant
 
 # Restore the .ssh backup
 cp -a /tmp/.ssh /home/vagrant/
 
-# Re-initialize the home directory
-cp -r /etc/skel/.* /home/vagrant
-chown vagrant:vagrant /home/vagrant/
+chown -R vagrant:vagrant /home/vagrant/
