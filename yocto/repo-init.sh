@@ -4,8 +4,6 @@ MENIFEST_REPO_BRANCH=$2
 MANIFEST=$3
 YOCTODIR="$4"
 
-export CONFDIR=~/yocto/build/conf
-
 # Clone recipes
 mkdir -p "$YOCTODIR"
 cd "$YOCTODIR"
