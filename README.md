@@ -1,12 +1,15 @@
-h1. vagrant-cookbook
+vagrant-cookbook
+================
 
-h2. Introduction
+Introduction 
+------------
 The vagrant cookbook contains a lot of minor code snippets that we can reuse in
 Vagrantfiles provided for different projects. The general guideline is that the
 snippets should be generic, and use parameters to create code reuse as far as
 possible.
 
-h2. Example usage
+Example usage
+-------------
 If you have a snippet of code that looks like this in your current Vagrantfile:
 
 config.vm.provision "shell", inline: <<-SHELL
