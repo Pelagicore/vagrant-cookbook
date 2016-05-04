@@ -11,17 +11,22 @@ possible.
 Example usage
 -------------
 If you have a snippet of code that looks like this in your current Vagrantfile:
-
+```ruby
 config.vm.provision "shell", inline: <<-SHELL
         ping google.com &> /dev/null &
 SHELL
+```
 
 It could be broken out into a vagrant-cookbook/utils/keepalive.sh script
 containing the following code:
 
+```bash
 #!/bin/bash
 ping google.com 6> /dev/null &
+```
 
 and then reference that code using:
 
+```ruby
 config.vm.provision "shell", path: "cookbook/utils/keepalive.sh"
+```
