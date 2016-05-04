@@ -6,49 +6,6 @@
 disk_already_exists = File.exist?(disk_name)
 
 config.vm.provider "virtualbox" do |vb|
-    if not disk_already_exists
-        vb.customize ['createhd',
-                      '--filename', disk_name,
-                      '--size', disk_size_gb * 1024]
-    end
-
-    vb.customize ['storageattach', :id,
-                  '--storagectl', 'SATA Controller',
-                  '--port', 1,
-                  '--device', 0,
-                  '--type', 'hdd',
-                  '--medium', disk_name]
-end
-
-# On some hosts, the network stack needs to be kicked alive
-config.vm.provision "shell", inline: <<-SHELL
-    ping google.com &> /dev/null &
-SHELL
-
-config.vm.provision "shell", inline: <<-SHELL
-    # Back up the old .ssh directory, this contains the pubkey for the
-    # vagrant tool, w/o this, we can't use "vagrant ssh"
-    cp -a /home/vagrant/.ssh /tmp
-SHELL
-
-# If the disk is newly created, format it appropriately
-if not disk_already_exists
-    config.vm.provision "shell", inline: <<-SHELL
-        # o  - clear the in memory partition table
-        # n  - new partition
-        # p  - primary partition
-        # 1  - partition number 1
-        #" " - default - start at beginning of disk
-        #" " - default - full disk
-        # w  - write the partition table
-        (echo o; echo n; echo p; echo 1; echo " "; echo " "; echo w;) | fdisk /dev/sdb
-        mkfs.ext4 /dev/sdb1
-    SHELL
-end
-
-config.vm.provider "virtualbox" do |vb|
-    vb.memory = ram * 1024
-    vb.cpus = cpus
 
     if not disk_already_exists
         vb.customize ['createhd',
@@ -63,9 +20,3 @@ config.vm.provider "virtualbox" do |vb|
                   '--type', 'hdd',
                   '--medium', disk_name]
 end
-
-config.vm.provision "shell", inline: <<-SHELL
-    # Back up the old .ssh directory, this contains the pubkey for the
-    # vagrant tool, w/o this, we can't use "vagrant ssh"
-    cp -a /home/vagrant/.ssh /tmp
-SHELL
