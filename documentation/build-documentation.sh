@@ -12,12 +12,17 @@ sudo pip install Sphinx
 # Install Sphinx (as root)
 sudo pip install Sphinx
 sudo pip install sphinxcontrib-manpage
+sudo pip install hieroglyph
 
 # Build documentation
 cd "$DOC_DIR"
 make clean
 
-# Errors are fatal from now on
+
+# Not all projects have slides
+make slides
+
+# Errors are fatal from now on, these targets should always work
 set -e
 make html
 make latexpdf
