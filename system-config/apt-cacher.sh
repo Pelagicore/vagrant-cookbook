@@ -9,8 +9,10 @@ if [ "$retval" -ne "0" ] ; then
 
     echo "Adding apt proxy to target" 
 
-    echo -e "Acquire::http::Proxy \\"http://10.8.36.16:3142\\";\n" > /etc/apt/apt.conf.d/80proxysettings
+    echo -e "Acquire::http::Proxy \\"http://$server:3142\\";\n" > /etc/apt/apt.conf.d/80proxysettings
 
     apt-get update
 
+elif
+    echo "Failed to set apt-proxy to $server"
 fi

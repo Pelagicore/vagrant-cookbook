@@ -1,20 +1,32 @@
 #!/bin/bash
 
-alias apt-get="apt-get -y --force-yes"
+echo "Installing common build dependencies"
+
+function install {
+    packages="$@"
+
+    retval=100
+    count=0
+
+    if [[ "$retval" -ne "0" && $count -le 5 ]]; then
+        count=$count+1
+        DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy install $packages
+    fi
+}
 
 # Common dependencies
-apt-get install -y --force-yes git cmake build-essential pkg-config
+install git cmake build-essential pkg-config
 
 # Common for ivi-logging & pelagicore-utils
-apt-get install -y libglib2.0-dev
+install libglib2.0-dev
 
 # For pelagicontain
-apt-get install -y libdbus-c++-dev libdbus-c++-1-0v5 libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
+install libdbus-c++-dev libdbus-c++-1-0v5 libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
     lxc-dev libpulse-dev unzip bridge-utils lcov
 
 # For jsonparser
-apt-get install -y libjansson-dev libjansson4
+install libjansson-dev libjansson4
 
 # For pelagicontain examples
-apt-get install -y dbus-x11
+install dbus-x11
 
