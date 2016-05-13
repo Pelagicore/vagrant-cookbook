@@ -9,7 +9,15 @@ function aptrunner {
     count=0
     if [[ "$retval" -ne "0" && $count -le 5 ]]; then
         count=$count+1
-        DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy $cmd
+        export DEBIAN_FRONTEND=noninteractive
+        if [ "$cmd" == "update" ] ; then
+            flags="-uy"
+        else 
+            flags="-fuy"
+        fi
+        cmdline="apt-get -o Dpkg::Options::="--force-confnew" --force-yes $flags $cmd"
+        echo "Running $cmdline"
+        $cmdline
     fi
 }
 
