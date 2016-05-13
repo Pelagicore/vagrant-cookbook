@@ -13,7 +13,7 @@ apt-get install -y libdbus-c++-dev libdbus-c++-1-0v5 libdbus-1-dev libglibmm-2.4
     lxc-dev libpulse-dev unzip bridge-utils lcov
 
 # For jsonparser
-apt-get install -y libjansson-dev libjansson4
+apt-get install -y libjansson-dev libjansson4 doxygen graphviz
 
 # For pelagicontain examples
 apt-get install -y dbus-x11
