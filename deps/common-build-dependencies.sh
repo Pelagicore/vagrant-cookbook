@@ -25,7 +25,7 @@ install libdbus-c++-dev libdbus-c++-1-0v5 libdbus-1-dev libglibmm-2.4-dev libgli
     lxc-dev libpulse-dev unzip bridge-utils lcov
 
 # For jsonparser
-install libjansson-dev libjansson4
+install libjansson-dev libjansson4 doxygen graphviz
 
 # For pelagicontain examples
 install dbus-x11
