@@ -42,3 +42,19 @@ fragments are included using:
 ```ruby
 eval File.read("path/to/tragment.vagrantfile")
 ```
+
+Example usage in a project: As a git submodule
+----------------------------------------------
+In order for your project's Vagrantfile to gain access to the snippets in this
+repository, you need to ensure this git is checked out and accessible to your
+Vagrantfile. A good way to associate your project with a specific version of
+the vagrant-cookbook repository is to use `git submodules` (for more info on
+submodules, see here: https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+
+Use this git as a submodule in the following way:
+```bash
+cd your/project/
+git submodule add <THIS REPOSITORY> vagrant-cookbook
+```
+
+Your Vagrantfile can now refer to the snippets as in the examples above.
