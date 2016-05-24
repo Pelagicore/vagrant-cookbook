@@ -58,3 +58,8 @@ git submodule add <THIS REPOSITORY> vagrant-cookbook
 ```
 
 Your Vagrantfile can now refer to the snippets as in the examples above.
+
+
+Copyright (c) 2016 Pelagicore AB
+Source code here is under the Mozilla Public License 2.0, please see
+included "LICENSE" file for details.
