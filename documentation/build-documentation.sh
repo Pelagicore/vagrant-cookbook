@@ -4,9 +4,22 @@ DOC_DIR=$1
 
 echo "Building documentation in $DOC_DIR"
 
+function install {
+    packages="$@"
+
+    retval=100
+    count=0
+
+    if [[ "$retval" -ne "0" && $count -le 5 ]]; then
+        count=$count+1
+        DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy install $packages
+        retval=$?
+    fi
+}
+
 # Install dependencies (as root)
 sudo apt-get update
-sudo apt-get install -y git python-pip texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra aspell
+install git python-pip texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra aspell
 sudo pip install Sphinx
 
 # Install Sphinx (as root)

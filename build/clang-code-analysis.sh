@@ -1,6 +1,6 @@
 #!/bin/bash
 
-projname==$1
+projname=$1
 builddir=$projname/build
 cmakeargs=$2
 

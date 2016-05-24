@@ -11,6 +11,7 @@ function install {
     if [[ "$retval" -ne "0" && $count -le 5 ]]; then
         count=$count+1
         DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy install $packages
+        retval=$?
     fi
 }
 
@@ -30,3 +31,5 @@ install libjansson-dev libjansson4 doxygen graphviz
 # For pelagicontain examples
 install dbus-x11
 
+# For dbus-proxy
+install libdbus-glib-1-dev

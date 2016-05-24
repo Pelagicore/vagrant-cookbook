@@ -18,6 +18,7 @@ function aptrunner {
         cmdline="apt-get -o Dpkg::Options::="--force-confnew" --force-yes $flags $cmd"
         echo "Running $cmdline"
         $cmdline
+        retval=$?
     fi
 }
 
