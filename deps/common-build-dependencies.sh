@@ -31,5 +31,3 @@ install libjansson-dev libjansson4 doxygen graphviz
 # For pelagicontain examples
 install dbus-x11
 
-# For dbus-proxy
-install libdbus-glib-1-dev
