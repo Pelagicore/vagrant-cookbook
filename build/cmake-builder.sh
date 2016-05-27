@@ -6,7 +6,7 @@ cmakeargs=$2
 
 echo "Building $srcdir from /vagrant dir"
 
-rm -rf $srcdir
+sudo rm -rf $srcdir
 cp -a /vagrant $srcdir
 rm -rf $builddir
 mkdir $builddir
