@@ -9,6 +9,7 @@ sudo apt-get install -y clang valgrind
 
 sudo rm -rf $projname
 cp -a /vagrant $projname 
+sudo rm -rf $builddir
 mkdir $builddir
 cd $builddir
 ../run-scan-build.sh cmake -DCMAKE_INSTALL_PREFIX=/usr/ -DENABLE_TESTS=ON ..
