@@ -15,7 +15,7 @@ function install {
 
 # Install dependencies (as root)
 sudo apt-get update
-install git python-pip texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra aspell
+install git python-pip texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra texlive-generic-extra aspell
 
 # Install Sphinx (as root)
 sudo pip install Sphinx
