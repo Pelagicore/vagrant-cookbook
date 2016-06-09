@@ -1,13 +1,23 @@
 #!/bin/bash
 
 srcdir=$1
-builddir=$srcdir/build
 cmakeargs=$2
 
-echo "Building $srcdir from /vagrant dir"
+copy_vagrant=false
+if [ -n "$3" ] && [ "$3" == "COPY_VAGRANT" ]; then
+    copy_vagrant=true
+fi
 
-sudo rm -rf $srcdir
-cp -a /vagrant $srcdir
+builddir=$srcdir/build
+
+if $copy_vagrant; then
+    echo "Copying $srcdir from /vagrant dir"
+    sudo rm -rf $srcdir
+    cp -a /vagrant $srcdir
+fi
+
+echo "Building in $srcdir"
+
 rm -rf $builddir
 mkdir $builddir
 cd $builddir
