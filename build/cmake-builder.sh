@@ -2,13 +2,12 @@
 
 srcdir=$1
 cmakeargs=$2
+builddir=$srcdir/build
 
 copy_vagrant=false
 if [ -n "$3" ] && [ "$3" == "COPY_VAGRANT" ]; then
     copy_vagrant=true
 fi
-
-builddir=$srcdir/build
 
 if $copy_vagrant; then
     echo "Copying $srcdir from /vagrant dir"
