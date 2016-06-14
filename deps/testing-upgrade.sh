@@ -22,11 +22,25 @@ function aptrunner {
     fi
 }
 
+function install {
+    packages="$@"
 
-alias apt-get="apt-get -y --force-yes"
+    retval=100
+    count=0
+
+    if [[ "$retval" -ne "0" && $count -le 5 ]]; then
+        count=$count+1
+        DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy install $packages
+        retval=$?
+    fi
+}
+
 # Several packages need to be very recent, so use debian testing
 sed -i 's/jessie/testing/g' /etc/apt/sources.list
+sed -i 's/main/main contrib/g' /etc/apt/sources.list
 aptrunner update
 aptrunner dist-upgrade
 aptrunner autoremove
 
+# Reinstall for the new kernel, this ensures things will work after reboot
+install virtualbox-guest-utils
