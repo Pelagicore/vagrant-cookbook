@@ -37,7 +37,10 @@ function install {
 
 # Several packages need to be very recent, so use debian testing
 sed -i 's/jessie/testing/g' /etc/apt/sources.list
-sed -i 's/main/main contrib/g' /etc/apt/sources.list
+if ! grep -q "contrib" /etc/apt/sources.list; then
+    sed -i 's/main/main contrib/g' /etc/apt/sources.list
+fi
+
 aptrunner update
 aptrunner dist-upgrade
 aptrunner autoremove
