@@ -106,6 +106,6 @@ mkdir -p $sourcedir/$clangdir
 cd $sourcedir/$clangdir
 
 # Build
-scan-build $CHECKERS -o scan_build_output cmake ../ -DCMAKE_INSTALL_PREFIX=/usr/ $cmakeargs
+scan-build $CHECKERS -o scan_build_output cmake ../ $cmakeargs
 scan-build $CHECKERS -o scan_build_output make
 
