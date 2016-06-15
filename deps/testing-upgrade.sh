@@ -40,8 +40,6 @@ sed -i 's/jessie/testing/g' /etc/apt/sources.list
 if ! grep -q "contrib" /etc/apt/sources.list; then
     sed -i 's/main/main contrib/g' /etc/apt/sources.list
 fi
-sed -i 's/httpredir/ftp.se/g' /etc/apt/sources.list
-
 
 aptrunner update
 aptrunner dist-upgrade
