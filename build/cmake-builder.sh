@@ -20,12 +20,6 @@ echo "Building in $srcdir"
 rm -rf $builddir
 mkdir $builddir
 cd $builddir
-
-# If CMAKE_INSTALL_PREFIX is not set, we set it to /usr
-if grep -q "-DCMAKE_INSTALL_PREFIX=" <<< $cmakeargs; then
-    cmake ../ $cmakeargs
-else
-    cmake .. $cmakeargs -DCMAKE_INSTALL_PREFIX=/usr
-fi
+cmake .. $cmakeargs
 make && sudo make install
 
