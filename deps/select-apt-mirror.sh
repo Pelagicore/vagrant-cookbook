@@ -1,6 +1,12 @@
 #!/bin/bash
 # This script changes the apt mirror to use.
 
+if [[ "$1" -ne "" ]]; then
+    releaseName=$1
+else 
+    releaseName="testing"
+fi
+
 function install {
     packages="$@"
 
@@ -22,6 +28,6 @@ function install {
 
 rm sources.list
 install netselect-apt
-sudo netselect-apt -s -o sources.list testing
+sudo netselect-apt -s -o sources.list $releaseName
 mv sources.list /etc/apt/sources.list
 
