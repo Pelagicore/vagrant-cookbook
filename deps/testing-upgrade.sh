@@ -15,10 +15,15 @@ function aptrunner {
         else 
             flags="-fuy"
         fi
-        cmdline="apt-get -o Dpkg::Options::="--force-confnew" --force-yes $flags $cmd"
+        cmdline="apt-get -oAPT::Force-LoopBreak=true -oDpkg::Options::="--force-confnew" --force-yes $flags $cmd"
         echo "Running $cmdline"
         $cmdline
         retval=$?
+    fi
+
+    if [["$retval" -ne "0" ]]; then
+        echo "Failed to run " $cmdline
+        exit $retval
     fi
 }
 
@@ -32,6 +37,11 @@ function install {
         count=$count+1
         DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy install $packages
         retval=$?
+    fi
+
+    if [["$retval" -ne "0" ]]; then
+        echo "Failed to install " $packages
+        exit $retval
     fi
 }
 

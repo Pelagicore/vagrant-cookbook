@@ -13,10 +13,14 @@ function install {
         DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy install $packages
         retval=$?
     fi
+    if [[ "$retval" -ne "0" ]]; then
+        exit $retval
+    fi
 }
 
 # Common dependencies
 install git cmake build-essential pkg-config
+
 
 # Common for ivi-logging & pelagicore-utils
 install libglib2.0-dev
