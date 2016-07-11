@@ -21,5 +21,5 @@ function install {
 
 }
 
-install python-gobject python-dbus python-pip pydbus
-
+install python-gobject python-dbus python-pip
+pip install pydbus
