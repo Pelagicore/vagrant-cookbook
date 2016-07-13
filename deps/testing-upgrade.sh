@@ -21,7 +21,7 @@ function aptrunner {
         retval=$?
     fi
 
-    if [["$retval" -ne "0" ]]; then
+    if [[ "$retval" -ne "0" ]]; then
         echo "Failed to run " $cmdline
         exit $retval
     fi
@@ -39,7 +39,7 @@ function install {
         retval=$?
     fi
 
-    if [["$retval" -ne "0" ]]; then
+    if [[ "$retval" -ne "0" ]]; then
         echo "Failed to install " $packages
         exit $retval
     fi
