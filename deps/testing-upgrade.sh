@@ -56,4 +56,5 @@ aptrunner dist-upgrade
 aptrunner autoremove
 
 # Reinstall for the new kernel, this ensures things will work after reboot
-install virtualbox-guest-utils
+install linux-headers-amd64
+install virtualbox-guest-dkms --reinstall
