@@ -4,7 +4,7 @@
 echo "Performing upgrade of system to testing"
 
 function aptrunner {
-    cmd="$1"
+    cmd="$@"
     retval=100
     count=0
     if [[ "$retval" -ne "0" && $count -le 5 ]]; then
@@ -52,6 +52,10 @@ if ! grep -q "contrib" /etc/apt/sources.list; then
 fi
 
 aptrunner update
+
+# Something causes a problem with these in systemd, doesn't seem to be needed anyway.
+aptrunner remove rpcbind nfs-common
+
 aptrunner dist-upgrade
 aptrunner autoremove
 
