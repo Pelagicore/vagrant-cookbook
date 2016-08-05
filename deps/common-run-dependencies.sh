@@ -24,5 +24,5 @@ function install {
 # For dbus-proxy
 install libdbus-glib-1-dev
 
-# For pelagicontain unit tests
+# For softwarecontainer unit tests
 install pulseaudio alsa-utils

@@ -25,13 +25,13 @@ install git cmake build-essential pkg-config
 # Common for ivi-logging & pelagicore-utils
 install libglib2.0-dev
 
-# For pelagicontain
+# For softwarecontainer
 install libdbus-c++-dev libdbus-c++-1-0v5 libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
     lxc-dev libpulse-dev unzip bridge-utils lcov
 
 # For jsonparser
 install libjansson-dev libjansson4 doxygen graphviz
 
-# For pelagicontain examples
+# For softwarecontainer examples
 install dbus-x11
 
