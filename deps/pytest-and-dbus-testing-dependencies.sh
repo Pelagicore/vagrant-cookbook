@@ -1,4 +1,9 @@
 #!/bin/bash
+# 
+# Usage: pytest-and-dbus-testing-dependencies.sh
+# 
+# Installs pytest and dbus testing dependencies used by various test frameworks.
+#
 
 echo "Installing py.test and D-Bus testing dependencies"
 

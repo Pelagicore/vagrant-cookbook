@@ -8,6 +8,20 @@ Vagrantfiles provided for different projects. The general guideline is that the
 snippets should be generic, and use parameters to create code reuse as far as
 possible.
 
+Directory Structure
+-------------------
+* build - bash snippets for building software from various source code 
+repositories. 
+* deps - bash snippets for automatically downloading and installing various 
+build/runtime dependencies for common types of work.
+* host-system-config - Vagrant snippets and related bash scripts for configuring 
+the host systems
+* system-config - various scripts for configuring the host system.
+utils - utility scripts for various tasks.
+* yocto - yocto related utilities used to download tools, setup environments and 
+to build yocto targets. 
+
+
 Example usage: Shell scripts
 ----------------------------
 If you have a snippet of code that looks like this in your current Vagrantfile:

@@ -1,4 +1,10 @@
 #!/bin/bash
+# 
+# Usage: cmake-git-builder.sh <srcdir> <gitrepo> <cmakeargs>
+# 
+# Download gitrepo containing a cmake build system into srcdir and build 
+# in srcdir/build using cmakeargs to cmake. 
+#
 
 srcdir=$1
 builddir=$srcdir/build

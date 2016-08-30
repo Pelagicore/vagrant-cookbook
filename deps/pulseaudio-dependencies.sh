@@ -1,4 +1,10 @@
 #!/bin/bash
+#
+# Usage: pulseaudio-dependencies.sh
+#
+# Installs the requirements for pulseaudio and dependencies for pulseaudio 
+# tests
+#
 
 echo "Installing Pulseaudio related dependencies"
 

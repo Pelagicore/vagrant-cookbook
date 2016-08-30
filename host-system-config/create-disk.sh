@@ -1,4 +1,14 @@
 #!/bin/bash
+# 
+# Usage: create-disk.sh <disk>
+# 
+# This script will format the entire disk pointed to by <disk> with ext4 and 
+# mount it as /home
+# 
+# This script is usually used in conjunction with the 
+# attach-extra-disk.vagrantfile
+#
+
 
 disk=$1
 

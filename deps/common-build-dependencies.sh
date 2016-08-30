@@ -1,4 +1,9 @@
 #!/bin/bash
+# 
+# Usage: common-build-dependencies.sh
+#
+# Installs basic build dependencies required to build basic packages.
+#
 
 echo "Installing common build dependencies"
 

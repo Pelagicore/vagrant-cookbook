@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# Usage: version-control-dependencies.sh
+#
+# Installs dependencies required to work with version control systems
+# 
 
 echo "Installing version control system dependencies" 
 

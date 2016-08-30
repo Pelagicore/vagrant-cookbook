@@ -1,4 +1,8 @@
 #!/bin/bash
+# 
+# Usage: common-api-yocto.sh
+# 
+# Installs all the packages required to build common api in yocto. 
 
 echo "Installing version control system dependencies" 
 

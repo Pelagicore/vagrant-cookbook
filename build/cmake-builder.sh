@@ -1,4 +1,10 @@
 #!/bin/bash
+# 
+# Usage: cmake-builder.sh <srcdir> <cmakeargs> <copyflag>
+# 
+# If copyflag is set to true, copy the vagrant directory to the srcdir 
+# and build, else just build whatever is there directly.
+#
 
 srcdir=$1
 cmakeargs=$2

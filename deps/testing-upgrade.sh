@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Usage: testing-upgrade.sh
+#
 # This script upgrades a system from jessie to testing
 
 echo "Performing upgrade of system to testing"

@@ -1,4 +1,10 @@
 #!/bin/bash
+#
+# Usage: sphinx-dependencies.sh 
+#
+# Installs all required dependencies for running sphinx documentation 
+# generation jobs.
+#
 
 function install {
     packages="$@"
@@ -20,7 +26,8 @@ function install {
 
 # Install dependencies (as root)
 sudo apt-get update
-install git python-pip texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra texlive-generic-extra aspell
+install git python-pip texlive-latex-base texlive-latex-recommended \
+    texlive-fonts-recommended texlive-latex-extra texlive-generic-extra aspell
 
 # Install Sphinx (as root)
 sudo pip install Sphinx

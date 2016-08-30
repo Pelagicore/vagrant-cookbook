@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# Usage: wayland-dependencies.sh
+# 
+# Install the dependencies required to run wayland and weston applications.
+#
 
 echo "Installing wayland related dependencies"
 
