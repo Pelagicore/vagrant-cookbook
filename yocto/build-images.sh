@@ -1,6 +1,9 @@
 #!/bin/bash
-
-# Source the environment and build the supplied images
+#
+# Usage: build-images.sh <yoctodir> <images>
+#
+# Source the environment and build the supplied images in the yoctodir
+#
 
 YOCTO_DIR="$1"
 IMAGES="$2"

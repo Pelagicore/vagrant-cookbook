@@ -3,7 +3,7 @@ vagrant-cookbook
 
 Introduction 
 ------------
-The vagrant cookbook contains a lot of small code snippets that we can reuse in
+The vagrant cookbook contains a lot of small code snippets that we reuse in
 Vagrantfiles provided for different projects. The general guideline is that the
 snippets should be generic, and use parameters to create code reuse as far as
 possible.
