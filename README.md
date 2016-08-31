@@ -1,6 +1,11 @@
 vagrant-cookbook
 ================
 
+Copyright and license
+---------------------
+Copyright (C) 2016 Pelagicore AB
+The source code in this repository is subject to the terms of the MPL-2.0 licence.
+
 Introduction 
 ------------
 The vagrant cookbook contains a lot of small code snippets that we reuse in
