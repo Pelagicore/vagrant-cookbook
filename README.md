@@ -14,9 +14,9 @@ snippets should be generic, and use parameters to create code reuse as far as
 possible.
 
 It is worth mentioning that since Pelagicore use Vagrant almost exclusively with 
-VirtualBox as the virtualization provider, some scripts assume that. Most notably
-when upgrading to debian testing, virtualbox-dkms is reinstalled and rebuilt
-for the new kernel.
+VirtualBox as the virtualization provider, some scripts assume that Virtualbox
+is used as vagrant provider. Most notably when upgrading to debian testing,
+virtualbox-dkms is reinstalled and rebuilt for the new kernel.
 
 Directory Structure
 -------------------
