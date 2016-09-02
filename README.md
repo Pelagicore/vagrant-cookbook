@@ -13,10 +13,10 @@ Vagrantfiles provided for different projects. The general guideline is that the
 snippets should be generic, and use parameters to create code reuse as far as
 possible.
 
-It is worth mentioning that since we use Vagrant more or less exclusively with 
+It is worth mentioning that since Pelagicore use Vagrant almost exclusively with 
 VirtualBox as the virtualization provider, some scripts assume that. Most notably
-where we upgrade to debian testing, we reinstall the dkms module for VirtualBox,
-to have it rebuilt for the new kernel.
+when upgrading to debian testing, virtualbox-dkms is reinstalled and rebuilt
+for the new kernel.
 
 Directory Structure
 -------------------
