@@ -1,11 +1,6 @@
 vagrant-cookbook
 ================
 
-Copyright and license
----------------------
-Copyright (C) 2016 Pelagicore AB
-The source code in this repository is subject to the terms of the MPL-2.0 licence.
-
 Introduction 
 ------------
 The vagrant cookbook contains a lot of small code snippets that we reuse in
@@ -83,7 +78,8 @@ git submodule add <THIS REPOSITORY> vagrant-cookbook
 
 Your Vagrantfile can now refer to the snippets as in the examples above.
 
+Copyright and license
+---------------------
+Copyright (C) 2016 Pelagicore AB
 
-Copyright (c) 2016 Pelagicore AB
-Source code here is under the Mozilla Public License 2.0, please see
-included "LICENSE" file for details.
+The source code in this repository is subject to the terms of the MPL-2.0 licence, please see included "LICENSE" file for details.
