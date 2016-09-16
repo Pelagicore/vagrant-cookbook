@@ -50,5 +50,6 @@ install git python-pip texlive-latex-base texlive-latex-recommended \
 # Install Sphinx (as root)
 sudo pip install Sphinx
 sudo pip install sphinxcontrib-manpage
+sudo pip install sphinxcontrib-seqdiag
 sudo pip install hieroglyph
 
