@@ -44,7 +44,10 @@ function install {
 
 }
 
-rm sources.list
+if [ -e "sources.list" ]; then
+    rm sources.list
+fi
+
 install netselect-apt
 sudo netselect-apt -s -o sources.list $releaseName
 mv sources.list /etc/apt/sources.list
