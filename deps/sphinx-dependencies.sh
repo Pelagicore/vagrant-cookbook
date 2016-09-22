@@ -24,6 +24,10 @@
 # generation jobs.
 #
 
+if [ -n "$1" ] && [ "$1" = "INSTALL_TEXLIVE" ]; then
+    INSTALL_TEXLIVE="yes"
+fi
+
 function install {
     packages="$@"
 
@@ -44,8 +48,13 @@ function install {
 
 # Install dependencies (as root)
 sudo apt-get update
-install git python-pip texlive-latex-base texlive-latex-recommended \
-    texlive-fonts-recommended texlive-latex-extra texlive-generic-extra aspell
+install git python-pip
+
+if [ -n "$INSTALL_TEXLIVE" ]; then
+    install texlive-latex-base texlive-latex-recommended \
+            texlive-fonts-recommended texlive-latex-extra \
+            texlive-generic-extra aspell
+fi
 
 # Install Sphinx (as root)
 sudo pip install Sphinx
