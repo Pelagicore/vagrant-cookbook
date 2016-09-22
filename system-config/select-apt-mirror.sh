@@ -18,8 +18,11 @@
 # For further information see LICENSE
 # 
 # This script changes the apt mirror to use.
+#
+# Usage: select-apt-mirror.sh [release]
+#
 
-if [[ "$1" -ne "" ]]; then
+if [ -n "$1" ]; then
     releaseName="$1"
 else 
     releaseName="testing"
