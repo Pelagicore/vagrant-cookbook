@@ -45,5 +45,5 @@ function install {
 
 }
 
-install pulseaudio
+install pulseaudio libpulse-dev
 
