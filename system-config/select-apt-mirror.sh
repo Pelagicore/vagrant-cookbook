@@ -18,9 +18,12 @@
 # For further information see LICENSE
 # 
 # This script changes the apt mirror to use.
+#
+# Usage: select-apt-mirror.sh [release]
+#
 
-if [[ "$1" -ne "" ]]; then
-    releaseName=$1
+if [ -n "$1" ]; then
+    releaseName="$1"
 else 
     releaseName="testing"
 fi
@@ -52,3 +55,4 @@ install netselect-apt
 sudo netselect-apt -s -o sources.list $releaseName
 mv sources.list /etc/apt/sources.list
 
+apt-get update
