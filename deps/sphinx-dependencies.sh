@@ -17,8 +17,7 @@
 #   
 # For further information see LICENSE
 # 
-#
-# Usage: sphinx-dependencies.sh 
+# Usage: sphinx-dependencies.sh [INSTALL_TEXLIVE]
 #
 # Installs all required dependencies for running sphinx documentation 
 # generation jobs.
