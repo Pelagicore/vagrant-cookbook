@@ -62,5 +62,6 @@ sudo pip install --upgrade pip
 sudo pip install Sphinx
 sudo pip install sphinxcontrib-manpage
 sudo pip install sphinxcontrib-seqdiag
+sudo pip install sphinxcontrib-blockdiag
 sudo pip install hieroglyph
 
