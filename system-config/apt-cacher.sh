@@ -32,7 +32,6 @@ retval=1
 ping -c 1 $server
 pingretval=$?
 if [ $pingretval == 0 ] ; then 
-    echo "hihihi"
     curl $server:$port > /dev/null 2>&1
     retval=$?
 fi 
