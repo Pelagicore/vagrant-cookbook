@@ -64,5 +64,9 @@ function install {
 }
 
 builddep qt5-default
-install libxcb-xinerama0-dev
+install libxcb-xinerama0-dev bison build-essential gperf flex ruby python libasound2-dev libbz2-dev \
+        libcap-dev libcups2-dev libdrm-dev libegl1-mesa-dev libgcrypt11-dev libnss3-dev libpci-dev \
+        libpulse-dev libudev-dev libxtst-dev gyp ninja-build libssl-dev libxcursor-dev libxcomposite-dev \
+        libxdamage-dev libxrandr-dev libfontconfig1-dev libxss-dev libsrtp0-dev libwebp-dev libjsoncpp-dev \
+        libopus-dev libminizip-dev libavutil-dev libavformat-dev libavcodec-dev libevent-dev
 
