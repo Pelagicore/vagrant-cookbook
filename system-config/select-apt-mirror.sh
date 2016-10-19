@@ -22,6 +22,8 @@
 # Usage: select-apt-mirror.sh [release]
 #
 
+apt-get update
+
 if [ -n "$1" ]; then
     releaseName="$1"
 else 
@@ -52,7 +54,7 @@ if [ -e "sources.list" ]; then
 fi
 
 install netselect-apt
-sudo netselect-apt -s -o sources.list $releaseName
+sudo netselect-apt -f -s -o sources.list $releaseName
 mv sources.list /etc/apt/sources.list
 
 apt-get update
