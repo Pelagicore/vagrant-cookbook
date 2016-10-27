@@ -19,7 +19,7 @@
 # 
 # 
 # Usage: qmake-git-builder.sh <srcdir> <gitrepo> <qmakepath> <qmakeargs> \
-#              <.pro file>
+#              <.pro file> [revision]
 # 
 # Download git repo containing a qmake build system into srcdir and build 
 # in srcdir/build using qmakeargs to qmake. 
@@ -31,11 +31,17 @@ gitrepo=$2
 qmakepath=$3
 qmakeargs=$4
 projectfile=$5
+rev=$6
 
 echo "Building $srcdir from git repo $gitrepo"
 
 rm -rf $srcdir
 git clone $gitrepo $srcdir
+if  [[ "${rev}" != "" ]] ; then
+    cd $srcdir
+    git reset --hard $rev
+    cd ..
+fi
 mkdir $builddir
 cd $builddir
 $qmakepath ../$projectfile $qmakeargs
