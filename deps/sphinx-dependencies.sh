@@ -55,9 +55,13 @@ if [ -n "$INSTALL_TEXLIVE" ]; then
             texlive-generic-extra aspell
 fi
 
+# Updating
+sudo pip install --upgrade pip
+
 # Install Sphinx (as root)
 sudo pip install Sphinx
 sudo pip install sphinxcontrib-manpage
 sudo pip install sphinxcontrib-seqdiag
+sudo pip install sphinxcontrib-blockdiag
 sudo pip install hieroglyph
 

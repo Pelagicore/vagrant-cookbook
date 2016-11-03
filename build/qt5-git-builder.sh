@@ -1,6 +1,6 @@
 #!/bin/bash
 # vagrant-cookbook
-# Copyright (C) 2015 Pelagicore AB
+# Copyright (C) 2016 Pelagicore AB
 #      
 # Permission to use, copy, modify, and/or distribute this software for 
 # any purpose with or without fee is hereby granted, provided that the 
@@ -18,9 +18,22 @@
 # For further information see LICENSE
 # 
 # 
-# Usage: keepalive.sh
-#
-# On some hosts, the network stack needs to be kicked alive
+# Usage: qt5-git-builder.sh <srcdir> <branch> <configure args>
+# 
+# Download a certain branch of qt5 from git, and build and install.
 #
 
-ping google.com &> /dev/null &
+srcdir=$1
+gitrepo="https://github.com/qt/qt5.git"
+branch=$2
+configureargs=$3
+
+echo "Building $srcdir from git repo $gitrepo"
+
+rm -rf $srcdir
+git clone -b $branch $gitrepo $srcdir
+cd $srcdir
+./init-repository
+./configure $configureargs
+make -j3 && sudo make install
+

@@ -1,6 +1,6 @@
 #!/bin/bash
 # vagrant-cookbook
-# Copyright (C) 2015 Pelagicore AB
+# Copyright (C) 2016 Pelagicore AB
 #      
 # Permission to use, copy, modify, and/or distribute this software for 
 # any purpose with or without fee is hereby granted, provided that the 
@@ -17,10 +17,14 @@
 #   
 # For further information see LICENSE
 # 
-# 
-# Usage: keepalive.sh
 #
-# On some hosts, the network stack needs to be kicked alive
+# Usage: enable-all-deb-src.sh
+#
+# Uncomments all deb-src lines in /etc/apt/sources.list
 #
 
-ping google.com &> /dev/null &
+echo "Uncommenting deb-src in /etc/apt/sources.list"
+
+sed -i 's,# deb-src,deb-src,' /etc/apt/sources.list
+apt-get update
+

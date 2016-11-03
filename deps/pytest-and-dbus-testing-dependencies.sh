@@ -46,3 +46,4 @@ function install {
 
 install python-gobject python-dbus python-pip
 pip install pydbus
+pip install pytest

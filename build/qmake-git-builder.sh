@@ -1,6 +1,6 @@
 #!/bin/bash
 # vagrant-cookbook
-# Copyright (C) 2015 Pelagicore AB
+# Copyright (C) 2016 Pelagicore AB
 #      
 # Permission to use, copy, modify, and/or distribute this software for 
 # any purpose with or without fee is hereby granted, provided that the 
@@ -18,9 +18,32 @@
 # For further information see LICENSE
 # 
 # 
-# Usage: keepalive.sh
-#
-# On some hosts, the network stack needs to be kicked alive
+# Usage: qmake-git-builder.sh <srcdir> <gitrepo> <qmakepath> <qmakeargs> \
+#              <.pro file> [revision]
+# 
+# Download git repo containing a qmake build system into srcdir and build 
+# in srcdir/build using qmakeargs to qmake. 
 #
 
-ping google.com &> /dev/null &
+srcdir=$1
+builddir=$srcdir/build
+gitrepo=$2
+qmakepath=$3
+qmakeargs=$4
+projectfile=$5
+rev=$6
+
+echo "Building $srcdir from git repo $gitrepo"
+
+rm -rf $srcdir
+git clone $gitrepo $srcdir
+if  [[ "${rev}" != "" ]] ; then
+    cd $srcdir
+    git reset --hard $rev
+    cd ..
+fi
+mkdir $builddir
+cd $builddir
+$qmakepath ../$projectfile $qmakeargs
+make && sudo make install
+

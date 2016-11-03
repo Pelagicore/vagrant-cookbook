@@ -1,6 +1,6 @@
 #!/bin/bash
 # vagrant-cookbook
-# Copyright (C) 2015 Pelagicore AB
+# Copyright (C) 2016 Pelagicore AB
 #      
 # Permission to use, copy, modify, and/or distribute this software for 
 # any purpose with or without fee is hereby granted, provided that the 
@@ -17,17 +17,39 @@
 #   
 # For further information see LICENSE
 # 
-# 
-# Usage: common-api-yocto.sh
-# 
-# Installs all the packages required to build common api in yocto. 
+#
+# Usage: qt5-dependencies.sh
+#
+# Installs the build dependencies for qt5
+#
 
-echo "Installing version control system dependencies" 
+echo "Installing Qt5 related dependencies"
+
+function builddep {
+    packages="$@"
+
+    retval=100
+    count=0
+
+    if [[ "$retval" -ne "0" && $count -le 5 ]]; then
+        count=$count+1
+        DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy build-dep $packages
+        retval=$?
+    fi
+
+    if [[ "$retval" -ne "0" ]]; then
+        echo "Failed to install build-dep for " $packages
+        exit $retval
+    fi
+
+}
 
 function install {
     packages="$@"
+
     retval=100
     count=0
+
     if [[ "$retval" -ne "0" && $count -le 5 ]]; then
         count=$count+1
         DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy install $packages
@@ -38,6 +60,13 @@ function install {
         echo "Failed to install " $packages
         exit $retval
     fi
+
 }
 
-install maven
+builddep qt5-default
+install libxcb-xinerama0-dev bison build-essential gperf flex ruby python libasound2-dev libbz2-dev \
+        libcap-dev libcups2-dev libdrm-dev libegl1-mesa-dev libgcrypt11-dev libnss3-dev libpci-dev \
+        libpulse-dev libudev-dev libxtst-dev gyp ninja-build libssl-dev libxcursor-dev libxcomposite-dev \
+        libxdamage-dev libxrandr-dev libfontconfig1-dev libxss-dev libsrtp0-dev libwebp-dev libjsoncpp-dev \
+        libopus-dev libminizip-dev libavutil-dev libavformat-dev libavcodec-dev libevent-dev
+
