@@ -43,14 +43,17 @@ function install {
 install valgrind
 
 # For debugging
-install gdb pdb
+install gdb
 install strace
+
+install python-pip
+pip install pdb
 
 # Some editors
 install vim emacs
 
 # Network stuff
-install tcpdump netstat
+install tcpdump
 
 # shell
 install zsh
