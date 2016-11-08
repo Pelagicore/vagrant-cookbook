@@ -19,11 +19,13 @@
 # 
 # 
 # Usage: qmake-git-builder.sh <srcdir> <gitrepo> <qmakepath> <qmakeargs> \
-#              <.pro file> [revision]
+#              <.pro file> [revision] [make command]
 # 
 # Download git repo containing a qmake build system into srcdir and build 
 # in srcdir/build using qmakeargs to qmake. 
 #
+# The optional make command argument can be used to specify which commands should
+# be executed to build the source code. If nothing is specified it will run: make && sudo make install
 
 srcdir=$1
 builddir=$srcdir/build
@@ -32,6 +34,7 @@ qmakepath=$3
 qmakeargs=$4
 projectfile=$5
 rev=$6
+makecommand=$7
 
 echo "Building $srcdir from git repo $gitrepo"
 
@@ -45,5 +48,9 @@ fi
 mkdir $builddir
 cd $builddir
 $qmakepath ../$projectfile $qmakeargs
-make && sudo make install
+if  [[ "$makecommand" != "" ]] ; then
+    eval "$makecommand"
+else
+    make && sudo make install
+fi
 
