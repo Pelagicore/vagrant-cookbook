@@ -18,15 +18,18 @@
 # For further information see LICENSE
 # 
 # 
-# Usage: qt5-git-builder.sh <srcdir> <branch> <configure args>
+# Usage: qt5-git-builder.sh <srcdir> <branch> <configure args> [make command]
 # 
 # Download a certain branch of qt5 from git, and build and install.
 #
+# The optional make command argument can be used to specify which commands should
+# be executed to build qt5. If nothing is specified it will run: make && sudo make install
 
 srcdir=$1
 gitrepo="https://github.com/qt/qt5.git"
 branch=$2
 configureargs=$3
+makecommand=$4
 
 echo "Building $srcdir from git repo $gitrepo"
 
@@ -35,5 +38,9 @@ git clone -b $branch $gitrepo $srcdir
 cd $srcdir
 ./init-repository
 ./configure $configureargs
-make -j3 && sudo make install
+if  [[ "$makecommand" != "" ]] ; then
+    eval "$makecommand"
+else
+    make && sudo make install
+fi
 
