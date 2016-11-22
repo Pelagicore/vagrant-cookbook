@@ -50,9 +50,6 @@ install libdbus-c++-dev libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
 git clone git://github.com/lxc/lxc -b stable-2.0
 cd lxc
 
-# Last known good commit before cgroups v2 issue starts happening on Debian Jessie
-git checkout 798ee9ba238385965c308fa8682d35cbdaeceb35
-
 ./autogen.sh
 ./configure --prefix=/usr --enable-capabilities --with-distro=debian
 make
