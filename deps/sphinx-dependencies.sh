@@ -57,6 +57,7 @@ fi
 
 # Updating
 sudo pip install --upgrade pip
+sudo pip install --upgrade requests
 
 # Install Sphinx (as root)
 sudo pip install Sphinx
