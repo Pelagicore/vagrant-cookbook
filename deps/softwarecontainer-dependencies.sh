@@ -52,5 +52,5 @@ cd lxc
 
 ./autogen.sh
 ./configure --prefix=/usr --enable-capabilities --with-distro=debian
-make -j$(nproc)
-sudo make install
+
+make && make install

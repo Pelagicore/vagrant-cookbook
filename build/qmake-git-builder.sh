@@ -51,6 +51,6 @@ $qmakepath ../$projectfile $qmakeargs
 if  [[ "$makecommand" != "" ]] ; then
     eval "$makecommand"
 else
-    make -j$(nproc) && sudo make install
+    make && sudo make install
 fi
 
