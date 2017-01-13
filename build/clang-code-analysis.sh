@@ -125,5 +125,5 @@ cd $sourcedir/$clangdir
 
 # Build
 scan-build $CHECKERS -o scan_build_output cmake ../ $cmakeargs
-scan-build $CHECKERS -o scan_build_output make -j$(nproc)
+scan-build $CHECKERS -o scan_build_output make
 

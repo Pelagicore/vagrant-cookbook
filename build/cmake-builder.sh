@@ -39,11 +39,12 @@ if $copy_vagrant; then
     cp -a /vagrant $srcdir
 fi
 
-echo "Building in $srcdir"
+echo "Building from $srcdir in $builddir"
 
 rm -rf $builddir
 mkdir $builddir
 cd $builddir
-cmake .. $cmakeargs
-make -j$(nproc) && sudo make install
+cmake ../ $cmakeargs
+
+make && sudo make install
 

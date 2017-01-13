@@ -42,5 +42,6 @@ fi
 mkdir $builddir
 cd $builddir
 cmake .. $cmakeargs
-make -j$(nproc) && sudo make install
+
+make && sudo make install
 

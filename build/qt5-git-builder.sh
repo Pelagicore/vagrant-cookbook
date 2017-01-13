@@ -38,9 +38,10 @@ git clone -b $branch $gitrepo $srcdir
 cd $srcdir
 ./init-repository
 ./configure $configureargs
+
 if  [[ "$makecommand" != "" ]] ; then
     eval "$makecommand"
 else
-    make -j$(nproc) && sudo make install
+    make && sudo make install
 fi
 

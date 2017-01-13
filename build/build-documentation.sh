@@ -26,11 +26,10 @@ echo "Building documentation in $DOC_DIR"
 cd "$DOC_DIR"
 make clean
 
-
 # Not all projects have slides
-make -j$(nproc) slides
+make slides
 
 # Errors are fatal from now on, these targets should always work
 set -e
-make -j$(nproc) html
-make -j$(nproc) latexpdf
+make html
+make latexpdf
