@@ -44,7 +44,7 @@ module VagrantPlugins
       description <<-DESC
       The reload plugin allows a VM to be reloaded as a provisioning step.
       DESC
-      
+
       provisioner "reload" do
         class ReloadProvisioner < Vagrant.plugin("2", :provisioner)
 

@@ -47,6 +47,7 @@ install libdbus-c++-dev libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
         dbus-x11 libcap-dev libtool
 
 # Download and install lxc
+rm -rf lxc
 git clone git://github.com/lxc/lxc -b stable-2.0
 cd lxc
 
