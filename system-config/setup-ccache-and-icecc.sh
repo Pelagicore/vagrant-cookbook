@@ -72,7 +72,7 @@ fi
 # Only set these things if they were not already set.
 if ! grep "HAS_ICECC" /etc/profile; then
     # Make sure the ccache symbolic links are first in our $PATH
-    echo 'export PATH=/usr/lib/ccache/:$PATH' >> /etc/profile
+    echo 'export PATH=/usr/lib/ccache:$PATH' >> /etc/profile
     # Make sure ccache calls icecc when it tries to compile
     echo "export CCACHE_PREFIX=icecc" >> /etc/profile
     # Something for other scripts to check for
