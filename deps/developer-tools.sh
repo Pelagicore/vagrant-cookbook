@@ -57,3 +57,6 @@ install tcpdump
 
 # shell
 install zsh
+
+# Compilers
+install clang
