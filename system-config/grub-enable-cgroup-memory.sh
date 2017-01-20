@@ -21,7 +21,7 @@
 # Usage: grub-enable-cgroup-memory.sh
 #
 
-if ! grep "cgroup_enable=memory quiet" /etc/default/grub > /dev/null; then
+if ! grep "cgroup_enable=memory" /etc/default/grub > /dev/null; then
 	sed -i '/GRUB_CMDLINE_LINUX_DEFAULT=/c \GRUB_CMDLINE_LINUX_DEFAULT=\"cgroup_enable=memory swapaccount=1 quiet\"' /etc/default/grub
 	update-grub
     touch /vagrant/VAGRANT_NEEDS_RELOAD
