@@ -72,7 +72,6 @@ CHECKERS="-enable-checker alpha.core.BoolAssignment\
     -enable-checker core.uninitialized.CapturedBlockVariable\
     -enable-checker core.uninitialized.UndefReturn\
     -enable-checker cplusplus.NewDelete\
-    -enable-checker cplusplus.NewDeleteLeaks\
     -enable-checker deadcode.DeadStores\
     -enable-checker llvm.Conventions\
     -enable-checker osx.API\
@@ -115,7 +114,6 @@ sourcedir=$1
 clangdir=$2
 cmakeargs=$3
 
-sudo apt-get update
 sudo apt-get install -y clang valgrind
 
 # Remove old dir if existing
@@ -123,7 +121,13 @@ rm -rf $sourcedir/$clangdir
 mkdir -p $sourcedir/$clangdir
 cd $sourcedir/$clangdir
 
-# Build
-scan-build $CHECKERS -o scan_build_output cmake ../ $cmakeargs
-scan-build $CHECKERS -o scan_build_output make
+scandir="scan_build_output"
 
+# CMake
+scan-build $CHECKERS -o "$scandir" cmake ../ $cmakeargs
+rm -rf "$scandir/*"
+
+# Build
+scan-build $CHECKERS -o "$scandir" make
+cd $scandir
+rename -f 's/.*/report/' *
