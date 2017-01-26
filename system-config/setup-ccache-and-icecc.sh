@@ -52,18 +52,19 @@ install ccache icecc
 # If you want to use clang, set CC and CXX (since they take precedence). This works together with
 # the icecc and ccache setup. However, if you use update-alternatives to select clang, it fails
 # for some reason.
+#
 
-# In case one wants to install clang, this will be ready to use with icecc
-if ! [ -f "/usr/lib/icecc/bin/clang" ]; then
+# In case one wants to install clang, it will be ready to use with icecc
+if ! [ -e "/usr/lib/icecc/bin/clang" ]; then
     pushd /usr/lib/icecc/bin
     ln -s $(which icecc) clang
     ln -s $(which icecc) clang++
     popd
 fi
 
-# And in case one wants to install clang, this will be ready to use with ccache
-if ! [ -f "/usr/lib/ccache/clang" ]; then
-    pushd /usr/lib/ccache/
+# And in case one wants to install clang, it will be ready to use with ccache
+if ! [ -e "/usr/lib/ccache/clang" ]; then
+    pushd /usr/lib/ccache
     ln -s $(which ccache) clang
     ln -s $(which ccache) clang++
     popd
@@ -77,8 +78,13 @@ if ! grep "HAS_ICECC" /etc/profile; then
     echo "export CCACHE_PREFIX=icecc" >> /etc/profile
     # Something for other scripts to check for
     echo "export HAS_ICECC=true" >> /etc/profile
+
     # Some default make flags
+    # Special case for only one CPU
     MAX_LOAD=$(($(nproc)+2))
+    if [ "$MAX_LOAD" -eq 3 ]; then
+        MAX_LOAD=2
+    fi
     echo "export MAKEFLAGS=\"-j -l${MAX_LOAD}\"" >> /etc/profile
 fi
 
