@@ -1,6 +1,6 @@
 #!/bin/bash
 # vagrant-cookbook
-# Copyright (C) 2016 Pelagicore AB
+# Copyright (C) 2016-2017 Pelagicore AB
 #
 # Permission to use, copy, modify, and/or distribute this software for
 # any purpose with or without fee is hereby granted, provided that the
@@ -17,40 +17,47 @@
 #
 # For further information see LICENSE
 #
-#
-# Usage: qmake-git-builder.sh <srcdir> <gitrepo> <qmakepath> <qmakeargs> \
-#              <.pro file> [revision] [make command]
-#
 # Download git repo containing a qmake build system into srcdir and build
 # in srcdir/build using qmakeargs to qmake.
 #
-# The optional make command argument can be used to specify which commands should
-# be executed to build the source code. If nothing is specified it will run: make && sudo make install
+# Usage: qmake-git-builder.sh
+#
+# Required environment variables:
+# SRC_DIR: Source directory to build
+# GIT_REPO: Git repository to clone
+#
+# Optional environment variables:
+# PRO_FILE: Project file to build with qmake (defaults to "../")
+# WIPE_SRC_DIR: Set to 'yes' in order to rm -rf the \$SRC_DIR before building
+# MAKE_COMMAND: Commands used to build the project. Defaults to "make && sudo make install"
+# QMAKE_ARGS: Arguments to pass to qmake. Defaults to ""
+# QMAKE_PATH: Full path to qmake. Defaults to "qmake" (picked from $PATH)
+# GIT_REVISION: Git revision to check out
 
-srcdir=$1
-builddir=$srcdir/build
-gitrepo=$2
-qmakepath=$3
-qmakeargs=$4
-projectfile=$5
-rev=$6
-makecommand=$7
+if [ -z ${SRC_DIR+x} ]; then echo "SRC_DIR must be set in env"; exit; fi
+if [ -z ${GIT_REPO+x} ]; then echo "GIT_REPO must be set in env"; exit; fi
+if [ -z ${PRO_FILE+x} ]; then PRO_FILE="../"; fi
+if [ -z ${MAKE_COMMAND+x} ]; then MAKE_COMMAND="make && sudo make install"; fi
+if [ -z ${QMAKE_ARGS+x} ]; then QMAKE_ARGS=""; fi
+if [ -z ${QMAKE_PATH+x} ]; then QMAKE_PATH="qmake"; fi
 
-echo "Building $srcdir from git repo $gitrepo"
+BUILD_DIR="$SRC_DIR/build"
 
-rm -rf $srcdir
-git clone $gitrepo $srcdir
-if  [[ "${rev}" != "" ]] ; then
-    cd $srcdir
-    git reset --hard $rev
-    cd ..
+echo "Building $SRC_DIR from git repo $GIT_REPO"
+
+if [ "$WIPE_SRC_DIR" == "yes" ]; then
+    rm -rf "$SRC_DIR"
 fi
-mkdir $builddir
-cd $builddir
-$qmakepath ../$projectfile $qmakeargs
-if  [[ "$makecommand" != "" ]] ; then
-    eval "$makecommand"
-else
-    make && sudo make install
+
+git clone "$GIT_REPO" "$SRC_DIR"
+git pull
+
+mkdir "$BUILD_DIR"
+cd "$BUILD_DIR"
+
+if [ "$GIT_REVISION" != "" ]; then
+    git reset --hard $GIT_REVISION
 fi
 
+$QMAKE_PATH "$PRO_FILE" $QMAKE_ARGS
+eval "$MAKE_COMMAND"
