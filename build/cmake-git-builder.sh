@@ -1,6 +1,6 @@
 #!/bin/bash
 # vagrant-cookbook
-# Copyright (C) 2015 Pelagicore AB
+# Copyright (C) 2015-2017 Pelagicore AB
 #
 # Permission to use, copy, modify, and/or distribute this software for
 # any purpose with or without fee is hereby granted, provided that the
@@ -17,31 +17,46 @@
 #
 # For further information see LICENSE
 #
-#
-# Usage: cmake-git-builder.sh <srcdir> <gitrepo> <cmakeargs> [revision]
-#
 # Download gitrepo containing a cmake build system into srcdir and build
 # in srcdir/build using cmakeargs to cmake.
 #
+# Usage: cmake-git-builder.sh
+#
+# Required environment variables:
+# SRC_DIR: Source directory to build
+# GIT_REPO: Git repository to clone
+#
+# Optional environment variables:
+# WIPE_SRC_DIR: Set to 'yes' in order to rm -rf the \$SRC_DIR before building
+# MAKE_COMMAND: Commands used to build the project. Defaults to "make && sudo make install"
+# CMAKE_ARGS: Arguments to pass to cmake
+# CMAKE_PATH: cmake executable path. Defaults to "cmake" (picked from $PATH)
+# GIT_REVISION: Git revision to check out
 
-srcdir=$1
-builddir=$srcdir/build
-gitrepo=$2
-cmakeargs=$3
-rev=$4
+if [ -z ${SRC_DIR+x} ]; then echo "SRC_DIR must be set in env"; exit; fi
+if [ -z ${GIT_REPO+x} ]; then echo "GIT_REPO must be set in env"; exit; fi
+if [ -z ${CMAKE_PATH+x} ]; then CMAKE_PATH="cmake"; fi
+if [ -z ${CMAKE_ARGS+x} ]; then CMAKE_ARGS=""; fi
+if [ -z ${MAKE_COMMAND+x} ]; then MAKE_COMMAND="make && sudo make install"; fi
 
-echo "Building $srcdir from git repo $gitrepo"
+BUILD_DIR=$SRC_DIR/build
 
-rm -rf $srcdir
-git clone $gitrepo $srcdir
-if  [[ "${rev}" != "" ]] ; then
-    cd $srcdir
-    git reset --hard $rev
-    cd ..
+echo "Building $SRC_DIR from git repo $GIT_REPO"
+
+if [ "$WIPE_SRC_DIR" == "yes" ]; then
+    rm -rf "$SRC_DIR"
 fi
-mkdir $builddir
-cd $builddir
-cmake .. $cmakeargs
 
-make && sudo make install
+git clone $GIT_REPO "$SRC_DIR"
+git pull
 
+mkdir "$BUILD_DIR"
+cd "$BUILD_DIR"
+
+if  [[ "$GIT_REVISION" != "" ]] ; then
+    git reset --hard $GIT_REVISION
+fi
+
+$CMAKE_PATH .. $CMAKE_ARGS
+
+eval "$MAKE_COMMAND"
