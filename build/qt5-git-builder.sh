@@ -17,31 +17,46 @@
 #
 # For further information see LICENSE
 #
-#
-# Usage: qt5-git-builder.sh <srcdir> <branch> <configure args> [make command]
-#
 # Download a certain branch of qt5 from git, and build and install.
 #
-# The optional make command argument can be used to specify which commands should
-# be executed to build qt5. If nothing is specified it will run: make && sudo make install
+# Usage: qt5-git-builder.sh
+#
+# Required environment variables:
+# SRC_DIR: Source directory to build
+# GIT_REPO: Git repository to clone
+# GIT_REVISION: Git revision to check out
+#
+# Optional environment variables:
+# WIPE_SRC_DIR: Set to 'yes' in order to rm -rf the \$SRC_DIR before building
+# MAKE_COMMAND: Commands used to build the project. Defaults to "make && sudo make install"
+# CONFIGURE_ARGS: Extra params to ./configure. Defaults to ""
+# CMAKE_ARGS: Arguments to pass to cmake
+# CMAKE_PATH: cmake executable path. Defaults to "cmake" (picked from $PATH)
 
-srcdir=$1
-gitrepo="https://github.com/qt/qt5.git"
-branch=$2
-configureargs=$3
-makecommand=$4
+if [ -z ${SRC_DIR+x} ]; then echo "SRC_DIR must be set in env"; exit; fi
+if [ -z ${GIT_REPO+x} ]; then echo "GIT_REPO must be set in env"; exit; fi
+if [ -z ${GIT_REVISION+x} ]; then echo "GIT_REVISION must be set in env"; exit; fi
+if [ -z ${MAKE_COMMAND+x} ]; then MAKE_COMMAND="make && sudo make install"; fi
+if [ -z ${CONFIGURE_ARGS+x} ]; then CONFIGURE_ARGS=""; fi
 
-echo "Building $srcdir from git repo $gitrepo"
+BUILD_DIR=$SRC_DIR/build
 
-rm -rf $srcdir
-git clone -b $branch $gitrepo $srcdir
-cd $srcdir
-./init-repository
-./configure $configureargs
+echo "Building $SRC_DIR from git repo $GIT_REPO"
 
-if  [[ "$makecommand" != "" ]] ; then
-    eval "$makecommand"
-else
-    make && sudo make install
+if [ "$WIPE_SRC_DIR" == "yes" ]; then
+    rm -rf "$SRC_DIR"
 fi
 
+git clone -b $GIT_REVISION $GIT_REPO $SRC_DIR
+git pull
+
+cd $SRC_DIR
+
+if  [[ "$GIT_REVISION" != "" ]] ; then
+    git reset --hard $GIT_REVISION
+fi
+
+./init-repository
+./configure $CONFIGURE_ARGS
+
+eval "$MAKE_COMMAND"
