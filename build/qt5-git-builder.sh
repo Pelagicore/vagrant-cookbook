@@ -1,6 +1,6 @@
 #!/bin/bash
 # vagrant-cookbook
-# Copyright (C) 2016 Pelagicore AB
+# Copyright (C) 2016-2017 Pelagicore AB
 #
 # Permission to use, copy, modify, and/or distribute this software for
 # any purpose with or without fee is hereby granted, provided that the
@@ -52,11 +52,12 @@ git pull
 
 cd $SRC_DIR
 
+./init-repository
+
 if  [[ "$GIT_REVISION" != "" ]] ; then
     git reset --hard $GIT_REVISION
 fi
 
-./init-repository
 ./configure $CONFIGURE_ARGS
 
 eval "$MAKE_COMMAND"
