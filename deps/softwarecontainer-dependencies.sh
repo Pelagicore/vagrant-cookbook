@@ -44,7 +44,9 @@ function install {
 # For softwarecontainer
 install libdbus-c++-dev libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
         unzip bridge-utils lcov libjansson-dev libjansson4 \
-        dbus-x11 libcap-dev libtool
+        dbus-x11 libcap-dev libtool 
+
+apt-get remove --force-yes -fuy lxcfs lxc2 lxc-dev lxc-common
 
 # Download and install lxc
 rm -rf lxc
