@@ -52,6 +52,6 @@ git clone git://github.com/lxc/lxc -b stable-2.0
 cd lxc
 
 ./autogen.sh
-./configure --prefix=/usr --enable-capabilities --with-distro=debian
+./configure --prefix=/usr --enable-capabilities 
 
 make && make install
