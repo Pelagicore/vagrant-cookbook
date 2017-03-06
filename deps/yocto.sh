@@ -43,5 +43,5 @@ sudo apt-get update
 install git sed wget cvs subversion git-core                            \
     coreutils unzip gawk python-pysqlite2 diffstat help2man make gcc    \
     build-essential g++ chrpath libxml2-utils libsdl1.2-dev texinfo     \
-    python3 graphviz
+    python3 graphviz qemu-user
 
