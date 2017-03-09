@@ -49,7 +49,6 @@ CHECKERS="-enable-checker alpha.core.BoolAssignment\
     -enable-checker alpha.security.ReturnPtrRange\
     -enable-checker alpha.security.taint.TaintPropagation\
     -enable-checker alpha.unix.Chroot\
-    -enable-checker alpha.unix.MallocWithAnnotations\
     -enable-checker alpha.unix.PthreadLock\
     -enable-checker alpha.unix.SimpleStream\
     -enable-checker alpha.unix.Stream\
