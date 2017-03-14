@@ -36,7 +36,7 @@ function aptrunner {
         else 
             flags="-fuy"
         fi
-        cmdline="apt-get -oAPT::Force-LoopBreak=true -oDpkg::Options::="--force-confnew" --force-yes $flags $cmd"
+        cmdline="apt-get -oAPT::Force-LoopBreak=true -oDpkg::Options::="--force-confnew" --allow-downgrades --allow-remove-essential --allow-change-held-packages $flags $cmd"
         echo "Running $cmdline"
         $cmdline
         retval=$?
@@ -56,7 +56,7 @@ function install {
 
     if [[ "$retval" -ne "0" && $count -le 5 ]]; then
         count=$count+1
-        DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy install $packages
+        DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --allow-downgrades --allow-remove-essential --allow-change-held-packages -fuy install $packages
         retval=$?
     fi
 

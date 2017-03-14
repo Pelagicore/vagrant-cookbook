@@ -33,7 +33,7 @@ function install {
 
     if [[ "$retval" -ne "0" && $count -le 5 ]]; then
         count=$count+1
-        DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy install $packages
+        DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --allow-downgrades --allow-remove-essential --allow-change-held-packages -fuy install $packages
         retval=$?
     fi
     if [[ "$retval" -ne "0" ]]; then
@@ -46,7 +46,7 @@ install libdbus-c++-dev libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
         unzip bridge-utils lcov libjansson-dev libjansson4 \
         dbus-x11 libcap-dev libtool 
 
-apt-get remove --force-yes -fuy lxcfs lxc2 lxc-dev lxc-common
+apt-get remove --allow-downgrades --allow-remove-essential --allow-change-held-packages -fuy lxcfs lxc2 lxc-dev lxc-common
 
 # Download and install lxc
 rm -rf lxc
