@@ -53,6 +53,8 @@ if [ -e "sources.list" ]; then
     rm sources.list
 fi
 
+apt-get update
+
 install netselect-apt
 sudo netselect-apt -f -s -o sources.list $releaseName
 mv sources.list /etc/apt/sources.list
