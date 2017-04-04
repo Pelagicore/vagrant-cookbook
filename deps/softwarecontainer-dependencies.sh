@@ -42,9 +42,9 @@ function install {
 }
 
 # For softwarecontainer
-install libdbus-c++-dev libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
+install libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
         unzip bridge-utils lcov libjansson-dev libjansson4 \
-        dbus-x11 libcap-dev libtool 
+        dbus-x11 libcap-dev libtool
 
 apt-get remove --allow-downgrades --allow-remove-essential --allow-change-held-packages -fuy lxcfs lxc2 lxc-dev lxc-common
 
@@ -54,6 +54,6 @@ git clone git://github.com/lxc/lxc -b stable-2.0
 cd lxc
 
 ./autogen.sh
-./configure --prefix=/usr --enable-capabilities 
+./configure --prefix=/usr --enable-capabilities
 
 make && make install
