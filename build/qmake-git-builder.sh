@@ -29,6 +29,8 @@
 # Optional environment variables:
 # PRO_FILE: Project file to build with qmake (defaults to "../")
 # WIPE_SRC_DIR: Set to 'yes' in order to rm -rf the \$SRC_DIR before building
+# ENABLE_SUBMODULES: Set to 'yes' in order to perform a git submodule update
+#     --init in the repository before building
 # MAKE_COMMAND: Commands used to build the project. Defaults to "make && sudo make install"
 # QMAKE_ARGS: Arguments to pass to qmake. Defaults to ""
 # QMAKE_PATH: Full path to qmake. Defaults to "qmake" (picked from $PATH)
@@ -50,7 +52,12 @@ if [ "$WIPE_SRC_DIR" == "yes" ]; then
 fi
 
 git clone "$GIT_REPO" "$SRC_DIR"
+pushd "$SRC_DIR"
 git pull
+if [ "$ENABLE_SUBMODULES" == "yes" ]; then
+    git submodule update --init
+fi
+popd
 
 mkdir "$BUILD_DIR"
 cd "$BUILD_DIR"
