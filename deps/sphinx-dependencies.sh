@@ -52,7 +52,7 @@ install git python-pip
 if [ -n "$INSTALL_TEXLIVE" ]; then
     install texlive-latex-base texlive-latex-recommended \
             texlive-fonts-recommended texlive-latex-extra \
-            texlive-generic-extra aspell
+            texlive-generic-extra aspell latexmk
 fi
 
 # Updating
