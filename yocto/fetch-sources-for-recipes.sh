@@ -22,12 +22,13 @@ YOCTO_DIR="$1"
 IMAGES="$2"
 COUNTER=100
 
-echo "Fetching all the sources. Try $COUNTER times in case of a bad connection."
-
 # Set up bitbake environment
+echo "Setting up bitbake environment."
 cd "$YOCTO_DIR/sources/poky/"
 source oe-init-build-env ../../build
 
+# Fetch all sources
+echo "Fetching all the sources. Will try $COUNTER times in case of a bad connection."
 I=0
 while [  $I -lt $COUNTER ]; do
     echo "Try number: $I"
