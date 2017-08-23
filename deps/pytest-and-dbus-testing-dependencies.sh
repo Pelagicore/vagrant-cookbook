@@ -48,10 +48,11 @@ function install {
 install python3-dbus python3-pip
 install python-gobject python-dbus python-pip
 
+pip install pydbus
+pip install pytest
+pip install psutil
+
 pip3 install pydbus
 pip3 install pytest
 pip3 install psutil
 
-pip install pydbus
-pip install pytest
-pip install psutil
