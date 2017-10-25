@@ -18,29 +18,20 @@
 # For further information see LICENSE
 #
 
+# Sets up the bitbake build directory.
 #
-# Fetches sources for a specific image with bitbake, retrying up to 100 times.
-# This is so that it will be possible to build even if one loses internet
-# connection after this step. We retry in case of temporary hickups.
-#
+# Usage: initialize-bitbake.sh <yocto-base-dir> [templateconf]
+# If templateconf is given, it is set and picked up by oe-init-build-env.
 
 YOCTO_DIR="$1"
-IMAGES="$2"
-COUNTER=100
+
+if [ -n "$2" ]; then
+    TEMPLATECONF="$2"
+fi
 
 # Set up bitbake environment
 echo "Setting up bitbake environment."
+set -e
+
 source "$YOCTO_DIR/sources/poky/oe-init-build-env" "$YOCTO_DIR/build"
 
-# Fetch all sources
-echo "Fetching all the sources. Will try $COUNTER times in case of a bad connection."
-I=0
-while [ $I -lt $COUNTER ]; do
-    echo "Try number: $I"
-    let I+=1
-    sleep 1
-    time bitbake -k -c fetchall $IMAGES
-    if [ $? -eq 0 ]; then
-        break
-    fi
-done
