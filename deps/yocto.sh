@@ -43,5 +43,7 @@ sudo apt-get update
 install git sed wget cvs subversion git-core                            \
     coreutils unzip gawk python-pysqlite2 diffstat help2man make gcc    \
     build-essential g++ chrpath libxml2-utils libsdl1.2-dev texinfo     \
-    python3 graphviz qemu-user gcc-multilib g++-multilib
+    python3 graphviz qemu-user gcc-multilib g++-multilib python3-pip
 
+# For Yocto bitbake -c testimage XML reporting
+sudo pip3 install unittest-xml-reporting
