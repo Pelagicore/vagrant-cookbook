@@ -26,14 +26,15 @@
 MANIFEST=$1
 YOCTO_BUILD_DIR="$2"
 SOURCE_CODE_ROOT="$3"
+BRANCH=${4:-master}
 
 # Get git shortlog for each meta layer if there is any changes of the revision
 get_changes() {
     path="$1"
     layer="$2"
     cd $SOURCE_CODE_ROOT
-    # Parse the manifest to get the hash of the layer for last and current commit
-    hash_A=$(git show HEAD~1:$MANIFEST | xmllint --xpath "string(/manifest/project[@path=\"$path\"]/@revision)" - )
+    # Parse the manifest to get the hash of the layer for current commit and BRANCH
+    hash_A=$(git show $BRANCH:$MANIFEST | xmllint --xpath "string(/manifest/project[@path=\"$path\"]/@revision)" - )
     hash_B=$(xmllint --xpath "string(/manifest/project[@path=\"$path\"]/@revision)" $MANIFEST)
     if [[ $hash_A != $hash_B ]]
     then
@@ -44,8 +45,8 @@ get_changes() {
 }
 
 cd $SOURCE_CODE_ROOT
-# Get the diff with last commit against manifest file
-diff=$(git diff HEAD~1 HEAD $MANIFEST)
+# Get the diff with HEAD and BRANCH(default to master) against manifest file
+diff=$(git diff $BRANCH HEAD $MANIFEST)
 if [[ ! -z "${diff// }" ]]
 then
     printf '%s\n' "$diff"
