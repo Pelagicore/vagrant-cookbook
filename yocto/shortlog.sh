@@ -26,7 +26,7 @@
 MANIFEST=$1
 YOCTO_BUILD_DIR="$2"
 SOURCE_CODE_ROOT="$3"
-BRANCH=${4:-master}
+BRANCH=${4:-origin/master}
 
 # Get git shortlog for each meta layer if there is any changes of the revision
 get_changes() {
