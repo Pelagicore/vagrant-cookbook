@@ -28,6 +28,9 @@ YOCTO_BUILD_DIR="$2"
 SOURCE_CODE_ROOT="$3"
 BRANCH=${4:-origin/master}
 
+# A positive exit code from now on is fatal
+set -e
+
 # Get git shortlog for each meta layer if there is any changes of the revision
 get_changes() {
     path="$1"
