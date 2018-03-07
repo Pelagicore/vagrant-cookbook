@@ -29,7 +29,7 @@ SOURCE_CODE_ROOT="$3"
 BRANCH=${4:-origin/master}
 
 # A positive exit code from now on is fatal
-set -e
+set -ex
 
 # Get git shortlog for each meta layer if there is any changes of the revision
 get_changes() {
