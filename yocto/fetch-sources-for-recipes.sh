@@ -29,8 +29,7 @@ IMAGES="$2"
 COUNTER=100
 
 # Set up bitbake environment
-echo "Setting up bitbake environment."
-source "$YOCTO_DIR/sources/poky/oe-init-build-env" "$YOCTO_DIR/build"
+./initialize-bitbake.sh $YOCTO_DIR
 
 # Fetch all sources
 echo "Fetching all the sources. Will try $COUNTER times in case of a bad connection."
