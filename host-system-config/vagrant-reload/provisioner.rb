@@ -1,5 +1,5 @@
 # Copyright (c) 2013 Aidan Nagorcka-Smith
-# Copyright (c) 2017 Pelagicore AB
+# Copyright (C) 2017-2018 Luxoft Sweden AB
 #
 # MIT License
 #
