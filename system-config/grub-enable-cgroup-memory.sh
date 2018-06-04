@@ -1,6 +1,6 @@
 #!/bin/bash
 # vagrant-cookbook
-# Copyright (C) 2017 Pelagicore AB
+# Copyright (C) 2017-2018 Luxoft Sweden AB
 #
 # Permission to use, copy, modify, and/or distribute this software for
 # any purpose with or without fee is hereby granted, provided that the

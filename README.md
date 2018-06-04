@@ -8,7 +8,7 @@ Vagrantfiles provided for different projects. The general guideline is that the
 snippets should be generic, and use parameters to create code reuse as far as
 possible.
 
-It is worth mentioning that since Pelagicore use Vagrant almost exclusively with
+It is worth mentioning that since PELUX uses Vagrant almost exclusively with
 VirtualBox as the virtualization provider, some scripts assume that Virtualbox
 is used as vagrant provider. Most notably when upgrading to debian testing,
 virtualbox-dkms is reinstalled and rebuilt for the new kernel.
@@ -80,6 +80,8 @@ Your Vagrantfile can now refer to the snippets as in the examples above.
 
 Copyright and license
 ---------------------
-Copyright (C) 2016 Pelagicore AB
+Copyright (C) 2016-2017 Pelagicore AB
+Copyright (C) 2017-2018 Luxoft Sweden AB
 
-The source code in this repository is subject to the terms of the MPL-2.0 licence, please see included "LICENSE" file for details.
+The source code in this repository is subject to the terms of the MPL-2.0 licence,
+please see included "LICENSE" file for details.
