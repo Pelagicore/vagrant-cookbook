@@ -15,7 +15,10 @@
 #
 # For further information see LICENSE
 #
-# For this script to run successfully, bitbake must be initialized. 
+# Usage: run-bitbake-tests.sh <yoctodir>  
+#
+# This tests the functionalities of bitbake. 
+# This script depends on bitbake initialization and image built. 
 # 
 
 
