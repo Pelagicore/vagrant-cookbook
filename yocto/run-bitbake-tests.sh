@@ -16,10 +16,10 @@
 #
 # For further information see LICENSE
 #
-# Usage: run-bitbake-tests.sh <yoctodir>  
+# Usage: run-bitbake-tests.sh <yoctodir>
 #
-# This tests the functionalities of bitbake. 
-# This script depends on bitbake initialization and image built. 
+# This tests the functionalities of bitbake.
+# This script depends on bitbake initialization and image built.
 # 
 
 
