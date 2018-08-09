@@ -29,7 +29,8 @@ IMAGES="$2"
 echo "BitBake'ing $IMAGES in $YOCTO_DIR"
 
 # Set up bitbake environment
-./initialize-bitbake.sh $YOCTO_DIR
+cd "$YOCTO_DIR/sources/poky/"
+source oe-init-build-env ../../build
 
 # A positive exit code from now on is fatal
 set -e
