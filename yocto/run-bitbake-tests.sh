@@ -28,5 +28,10 @@ YOCTO_DIR="$1"
 
 echo "Running bitbake tests in $YOCTO_DIR"
 
+# Set up bitbake environment
+cd "$YOCTO_DIR/sources/poky/"
+source oe-init-build-env ../../build
+
+
 #Run the tests
 bitbake-selftest
