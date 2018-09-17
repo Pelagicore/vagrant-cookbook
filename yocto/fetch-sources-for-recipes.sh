@@ -1,6 +1,7 @@
 #!/bin/bash
 # vagrant-cookbook
-# Copyright (C) 2015 Pelagicore AB
+# Copyright (C) 2015-2017 Pelagicore AB
+# Copyright (C) 2017-2018 Luxoft Sweden AB
 #
 # Permission to use, copy, modify, and/or distribute this software for
 # any purpose with or without fee is hereby granted, provided that the
@@ -39,7 +40,7 @@ while [ $I -lt $COUNTER ]; do
     echo "Try number: $I"
     let I+=1
     sleep 1
-    time bitbake -k -c fetchall $IMAGES
+    time bitbake $IMAGES --runall="fetch"
     if [ $? -eq 0 ]; then
         break
     fi
