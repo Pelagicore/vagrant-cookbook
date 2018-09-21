@@ -26,6 +26,7 @@
 YOCTO_DIR="$1"
 IMAGES="$2"
 
+echo "================================================================================================"
 echo "BitBake'ing $IMAGES in $YOCTO_DIR"
 
 # Set up bitbake environment

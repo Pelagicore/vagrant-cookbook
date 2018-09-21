@@ -21,6 +21,7 @@
 YOCTO_DIR="$1"
 IMAGES="$2"
 
+echo "================================================================================================"
 echo "Building Build an SDK for $IMAGES in $YOCTO_DIR"
 
 # Set up bitbake environment
