@@ -18,7 +18,7 @@
 # For further information see LICENSE
 #
 #
-# Usage: shortlog.sh <manifest> <yocto_build_dir> <source_code_root>
+# Usage: shortlog.sh <manifest> <yocto_build_dir> <source_code_root> <old_manifest>|<git_hash>
 #
 # Source the environment and print git shortlog for each layer to stdout.
 #
@@ -26,10 +26,18 @@
 MANIFEST=$1
 YOCTO_BUILD_DIR="$2"
 SOURCE_CODE_ROOT="$3"
-BRANCH=${4:-origin/master}
 
 # A positive exit code from now on is fatal
 set -ex
+
+if [ "${4: -4}" == ".xml" ]; then
+    OLD_MANIFEST="$4"
+else
+    BRANCH=${4:-origin/master}
+    OLD_MANIFEST="$(mktemp old_manifest.XXXXXX)"
+    git show $BRANCH:$MANIFEST > "${OLD_MANIFEST}"
+    CLEANUP_MANIFEST="1"
+fi
 
 # Get git shortlog for each meta layer if there is any changes of the revision
 get_changes() {
@@ -37,19 +45,24 @@ get_changes() {
     layer="$2"
     cd $SOURCE_CODE_ROOT
     # Parse the manifest to get the hash of the layer for current commit and BRANCH
-    hash_A=$(git show $BRANCH:$MANIFEST | xmllint --xpath "string(/manifest/project[@path=\"$path\"]/@revision)" - )
+    hash_A=$(xmllint --xpath "string(/manifest/project[@path=\"$path\"]/@revision)" ${OLD_MANIFEST})
     hash_B=$(xmllint --xpath "string(/manifest/project[@path=\"$path\"]/@revision)" $MANIFEST)
     if [[ $hash_A != $hash_B ]]
     then
         cd $layer
         # Get git shortlog as well as the layer name
-        repo forall -p $layer -c "git shortlog $hash_A..$hash_B ."
+        LOG=$(git shortlog $hash_A..$hash_B . || true)
+        if [ -n "$LOG" ]; then
+            echo "Changes for layer $layer"
+            echo $LOG
+            echo
+        fi
     fi
 }
 
 cd $SOURCE_CODE_ROOT
-# Get the diff with HEAD and BRANCH(default to master) against manifest file
-diff=$(git diff $BRANCH HEAD $MANIFEST)
+# Get the diff between the current and the previous manifest
+diff=$(diff -u ${OLD_MANIFEST} $MANIFEST || true)
 if [[ ! -z "${diff// }" ]]
 then
     printf '%s\n' "$diff"
@@ -62,4 +75,8 @@ then
         path=$(repo forall $layer -c "echo \$REPO_PATH")
         get_changes $path $layer
     done
+fi
+
+if [ -n "$CLEANUP_MANIFEST" ]; then
+    rm ${OLD_MANIFEST}
 fi
