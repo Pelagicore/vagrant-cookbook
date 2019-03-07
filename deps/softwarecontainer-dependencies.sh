@@ -50,8 +50,9 @@ apt-get remove --allow-downgrades --allow-remove-essential --allow-change-held-p
 
 # Download and install lxc
 rm -rf lxc
-git clone git://github.com/lxc/lxc -b stable-2.0
+git clone git://github.com/lxc/lxc -b master
 cd lxc
+git checkout 4dcd858b92d4135024290d70534c245e9cdd8d6d
 
 ./autogen.sh
 ./configure --prefix=/usr --enable-capabilities --enable-python
