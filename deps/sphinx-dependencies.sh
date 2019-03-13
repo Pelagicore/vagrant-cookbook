@@ -61,6 +61,7 @@ sudo pip install --upgrade requests
 
 # Install Sphinx (as root)
 sudo pip install Sphinx
+sudo pip install sphinx_rtd_theme
 sudo pip install sphinxcontrib-manpage
 sudo pip install sphinxcontrib-seqdiag
 sudo pip install sphinxcontrib-blockdiag
