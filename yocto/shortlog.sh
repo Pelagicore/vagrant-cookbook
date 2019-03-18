@@ -65,7 +65,6 @@ cd $SOURCE_CODE_ROOT
 diff=$(diff -u ${OLD_MANIFEST} $MANIFEST || true)
 if [[ ! -z "${diff// }" ]]
 then
-    printf '%s\n' "$diff"
     cd "$YOCTO_BUILD_DIR"
     # Get the layers used in the build
     for layer in `bitbake-layers show-layers | awk 'NR>2 {print $2}'`
