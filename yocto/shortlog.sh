@@ -43,19 +43,21 @@ fi
 get_changes() {
     path="$1"
     layer="$2"
+    layer_dir="$3"
     cd $SOURCE_CODE_ROOT
     # Parse the manifest to get the hash of the layer for current commit and BRANCH
     hash_A=$(xmllint --xpath "string(/manifest/project[@path=\"$path\"]/@revision)" ${OLD_MANIFEST})
     hash_B=$(xmllint --xpath "string(/manifest/project[@path=\"$path\"]/@revision)" $MANIFEST)
     if [[ $hash_A != $hash_B ]]
     then
-        cd $layer
+        cd $layer_dir
         # Get git shortlog as well as the layer name
-        LOG=$(git shortlog $hash_A..$hash_B . || true)
+        LOG="$(git shortlog $hash_A..$hash_B . || true)"
         if [ -n "$LOG" ]; then
             echo "Changes for layer $layer"
-            echo $LOG
             echo
+            echo "$LOG"
+            echo -e '\n\n===============================================================\n\n'
         fi
     fi
 }
@@ -67,12 +69,13 @@ if [[ ! -z "${diff// }" ]]
 then
     cd "$YOCTO_BUILD_DIR"
     # Get the layers used in the build
-    for layer in `bitbake-layers show-layers | awk 'NR>2 {print $2}'`
+    bitbake-layers show-layers | awk 'NR>2 {print $1 " " $2}' | while read layer_name layer_dir
     do
-        cd $layer
+        [ -z "$layer_dir" ] && continue
+        cd $layer_dir
         # Fetch the exact path name
-        path=$(repo forall $layer -c "echo \$REPO_PATH")
-        get_changes $path $layer
+        path=$(repo forall $layer_dir -c "echo \$REPO_PATH")
+        get_changes $path $layer_name $layer_dir
     done
 fi
 
