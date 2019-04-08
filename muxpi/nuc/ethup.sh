@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Copyright (C) 2019 Luxoft Sweden AB
+#
+# Permission to use, copy, modify, and/or distribute this software for
+# any purpose with or without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+# WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR
+# BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES
+# OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
+# WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
+# ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
+# SOFTWARE.
+#
+# For further information see LICENSE
+#
+# Script waits until ethernet is up on DUT. 
+# This script must be run on muxpi.
+#
+# Usage: 
+# $ ./ethup.sh DUP_IP
+   
+DUT_IP="$1"
+n=1 
+max=5
+delay=50
+while true; do
+   ping -c 1 -W 1 $DUT_IP && break || {
+     if [[ $n -lt $max ]]; then
+       echo "Command failed. Attempt $n/$max:"
+       ((n++))
+       sleep $delay;
+     else
+       echo "The command has failed after $n attempts."
+       exit 1
+     fi
+  }
+done
+echo "Ethernet is up"
