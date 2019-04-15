@@ -1,6 +1,7 @@
 #!/bin/bash
 # vagrant-cookbook
 # Copyright (C) 2015 Pelagicore AB
+# Copyright (C) 2019 Luxoft Sweden AB
 #
 # Permission to use, copy, modify, and/or distribute this software for
 # any purpose with or without fee is hereby granted, provided that the
@@ -45,7 +46,7 @@ function install {
 }
 
 # Install both python2 and python3 versions
-install python3-dbus python3-pip
+install python3-dbus python3-pip python3-lxc
 install python-gobject python-dbus python-pip
 
 pip install pydbus
