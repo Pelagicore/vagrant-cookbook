@@ -80,3 +80,4 @@ stm_armv7 -ts #test server
 
 stm_armv7 -clr #clear
 stm_armv7 -print "Ready!"
+stm_armv7 -dut

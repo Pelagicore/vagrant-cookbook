@@ -17,27 +17,24 @@
 #
 # For further information see LICENSE
 #
-# This script downloads, flashes the image and tests it on NUC. 
+# This script flashes the image and tests it on NUC. 
 # This script must be run on muxpi.
 #
 # Usage: 
-# $ ./flash.sh DUP_IP IMAGE [neptune]
+# $ ./flash.sh DUP_IP IMAGE_NAME 
 #    DUP_IP = a string with IP, can be an empty string
-#    IMAGE = a string with the name of the variant
-# The default image to use is the minimal image. If you want to run the neptune image
-# use the option 'neptune'.
+#    IMAGE_NAME = a string with the name of the variant
 
 
 set -e
 
 DUT_IP="$1"
-VARIANT="$2"
-NEPTUNE_IMAGE="$3"
+IMAGE_NAME="$2"
 
 HOMEPATH="/home/muxpi"
 IMAGESPATH="${HOMEPATH}/images"
 
-if [ "$VARIANT" == "" ]; then
+if [ "$IMAGE_NAME" == "" ]; then
    echo "Specify the name of image"
    exit -1
 fi
@@ -48,9 +45,9 @@ if [ "$DUT_IP" == "" ]; then
 fi
 
 stm -ts
-fota -card /dev/sda -map $HOMEPATH/artifacts/map.json $HOMEPATH/artifacts/$VARIANT
+fota -card /dev/sda -map $HOMEPATH/artifacts/map.json $HOMEPATH/artifacts/$IMAGE_NAME
 if [ $? == 0 ];then
-        echo "Image '${VARIANT} successfully flashed using fota"
+        echo "Image '${IMAGE_NAME} successfully flashed using fota"
 fi
 # boot the dut
 stm -dut
@@ -58,5 +55,5 @@ stm -dut
 cd /home/muxpi/scripts
 $HOMEPATH/scripts/ethup.sh $DUT_IP
 
-scp  -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no /home/muxpi/scripts/validation-NUC.sh root@$DUT_IP:/home	
-ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@$DUT_IP "/home/validation-NUC.sh"
+scp  -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no /home/muxpi/scripts/validation.sh root@$DUT_IP:/home	
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@$DUT_IP "/home/validation.sh"
