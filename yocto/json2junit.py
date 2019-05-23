@@ -61,7 +61,7 @@ class TestSuite:
     def copy_text(self, result, input_key, testcase_node, output_key):
         node = self.doc.createElement(output_key)
         if input_key in result:
-            text = doc.createTextNode(result[input_key])
+            text = self.doc.createTextNode(result[input_key])
             node.appendChild(text)
         testcase_node.appendChild(node)
 
