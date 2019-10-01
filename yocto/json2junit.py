@@ -55,6 +55,8 @@ class TestSuite:
         status = result['status']
         if status == 'FAILED':
             self.failures += 1
+        elif status == 'ERROR':
+            self.errors += 1
         elif status == 'SKIPPED':
             self.skipped += 1
 
@@ -75,6 +77,10 @@ class TestSuite:
         if status == 'FAILED':
             extra = self.doc.createElement('failure')
             extra.setAttribute('type', 'AssertionError')
+            msg = self.doc.createTextNode(result['log'])
+            extra.appendChild(msg)
+        elif status == 'ERROR':
+            extra = self.doc.createElement('error')
             msg = self.doc.createTextNode(result['log'])
             extra.appendChild(msg)
         elif status == 'SKIPPED':
