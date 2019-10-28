@@ -75,7 +75,7 @@ set +e
 set -e
 
 ls $IMAGESPATH
-mv $IMAGESPATH/$VARIANT*rootfs* $IMAGESPATH/$VARIANT
+mv $IMAGESPATH/$VARIANT*rootfs*.wic $IMAGESPATH/$VARIANT
 echo "Compresing \"$VARIANT\"..."
 (cd $IMAGESPATH; tar -czf $VARIANT.tar.gz $VARIANT)
 if [ $? == 0 ]; then
