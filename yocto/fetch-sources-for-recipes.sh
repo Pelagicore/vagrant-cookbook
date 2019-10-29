@@ -27,6 +27,8 @@
 
 YOCTO_DIR="$1"
 IMAGES="$2"
+shift 2
+BBARGS="$@" # Optional additional arguments to bitbake
 COUNTER=100
 
 # Set up bitbake environment
@@ -40,7 +42,7 @@ while [ $I -lt $COUNTER ]; do
     echo "Try number: $I"
     let I+=1
     sleep 1
-    time bitbake $IMAGES --runall="fetch"
+    time bitbake $IMAGES --runall="fetch" $BBARGS
     if [ $? -eq 0 ]; then
         break
     fi
