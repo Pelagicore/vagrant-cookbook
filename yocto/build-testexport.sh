@@ -31,7 +31,7 @@ echo "BitBake'ing testexport for $IMAGES in $YOCTO_DIR"
 
 # Set up bitbake environment
 cd "$YOCTO_DIR"
-source sources/poky/oe-init-build-env
+source sources/poky/oe-init-build-env build
 
 # A positive exit code from now on is fatal
 set -e
