@@ -40,7 +40,7 @@ set -e
 bitbake qemu-helper-native
 
 # Set up networking for qemu
-sudo ../sources/poky/scripts/runqemu-gen-tapdevs 1000 1000 4 tmp/sysroots-components/x86_64/qemu-helper-native/usr/bin
+sudo ../sources/poky/scripts/runqemu-gen-tapdevs `id -u` `id -g` 4 tmp/sysroots-components/x86_64/qemu-helper-native/usr/bin
 
 # Give qemu permissions to access tun interfaces
 sudo setcap cap_net_admin+ep $(find tmp/work/ -name qemu-system-x86_64 | grep qemu-helper-native)
