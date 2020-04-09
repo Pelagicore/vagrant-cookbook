@@ -46,7 +46,8 @@ install libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
         unzip bridge-utils lcov libjansson-dev libjansson4 \
         dbus-x11 libcap-dev libtool python3-dev
 
-apt-get remove --allow-downgrades --allow-remove-essential --allow-change-held-packages -fuy lxcfs lxc2 lxc-dev lxc-common
+apt-get remove --allow-downgrades --allow-remove-essential --allow-change-held-packages -fuy lxcfs lxc2 lxc-dev lxc-common \
+        liblxc-common liblxc-dev lxc1 liblxc1 lxc-templates lxc-tests lxc-utils
 
 # Download and install lxc
 rm -rf lxc
