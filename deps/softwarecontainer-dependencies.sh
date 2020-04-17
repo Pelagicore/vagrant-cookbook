@@ -47,7 +47,7 @@ install libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
         dbus-x11 libcap-dev libtool python3-dev
 
 apt-get remove --allow-downgrades --allow-remove-essential --allow-change-held-packages -fuy lxcfs lxc2 lxc-dev lxc-common \
-        liblxc-common liblxc-dev lxc1 liblxc1 lxc-templates lxc-tests lxc-utils
+        liblxc-common liblxc-dev lxc1 liblxc1 lxc-templates lxc-tests lxc-utils python3-lxc
 
 # Download and install lxc
 rm -rf lxc

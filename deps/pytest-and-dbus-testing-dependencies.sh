@@ -46,7 +46,7 @@ function install {
 }
 
 # Install both python2 and python3 versions
-install python3-dbus python3-pip python3-lxc
+install python3-dbus python3-pip
 install python-gobject python-dbus python-pip
 
 pip install pydbus
@@ -57,3 +57,11 @@ pip3 install pydbus
 pip3 install pytest
 pip3 install psutil
 
+# Download and install python3-lxc manually.
+# python3-lxc Ubuntu package depends on LXC packages, therefore LXC of
+# conflicting version will be installed
+rm -rf python3-lxc
+git clone git://github.com/lxc/python3-lxc -b python3-lxc-3.0.4
+cd python3-lxc
+
+python3 ./setup.py install
