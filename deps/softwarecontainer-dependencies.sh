@@ -44,7 +44,8 @@ function install {
 # For softwarecontainer
 install libdbus-1-dev libglibmm-2.4-dev libglibmm-2.4 \
         unzip bridge-utils lcov libjansson-dev libjansson4 \
-        dbus-x11 libcap-dev libtool python3-dev
+        dbus-x11 libcap-dev libtool python3-dev \
+        seccomp libseccomp-dev
 
 apt-get remove --allow-downgrades --allow-remove-essential --allow-change-held-packages -fuy lxcfs lxc2 lxc-dev lxc-common \
         liblxc-common liblxc-dev lxc1 liblxc1 lxc-templates lxc-tests lxc-utils python3-lxc
@@ -55,6 +56,6 @@ git clone git://github.com/lxc/lxc -b lxc-3.1.0
 cd lxc
 
 ./autogen.sh
-./configure --prefix=/usr --enable-capabilities --enable-python
+./configure --prefix=/usr --enable-capabilities --enable-python --enable-apparmor --enable-seccomp
 
 make && make install
