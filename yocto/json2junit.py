@@ -73,6 +73,8 @@ class TestSuite:
         tc.setAttribute('name', testcase_name)
         if self.iso_time:
             tc.setAttribute('timestamp', self.iso_time)
+        if 'duration' in result:
+            tc.setAttribute('time', str(result['duration']))
         status = result['status']
         if status == 'FAILED':
             extra = self.doc.createElement('failure')
