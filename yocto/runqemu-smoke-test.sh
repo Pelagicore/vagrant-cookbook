@@ -25,7 +25,8 @@
 #
 
 YOCTO_DIR="$1"
-IMAGES="$2"
+shift
+IMAGES="$*"
 
 echo "BitBake'ing $IMAGES in $YOCTO_DIR"
 
