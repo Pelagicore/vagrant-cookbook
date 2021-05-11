@@ -40,7 +40,7 @@ set -e
 bitbake qemu-helper-native
 
 # Set up networking for qemu
-sudo ../sources/poky/scripts/runqemu-gen-tapdevs `id -u` `id -g` 4 tmp/sysroots-components/x86_64/qemu-helper-native/usr/bin
+sudo ../sources/poky/scripts/runqemu-gen-tapdevs `id -u` `id -g` 20 tmp/sysroots-components/x86_64/qemu-helper-native/usr/bin
 
 # Start smoke tests
 time bitbake $IMAGES -c testimage
