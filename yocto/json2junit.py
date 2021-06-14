@@ -131,7 +131,7 @@ with open(args.file, 'r') as f:
             assert len(parts) == 3
 
             suite_name = '.'.join(parts[0:2])
-            testcase_name = parts[2]
+            testcase_name = f"{suite_name}_{start_time}"
 
             if suite_name not in suites:
                 suites[suite_name] = TestSuite(suite_name, start_time)
