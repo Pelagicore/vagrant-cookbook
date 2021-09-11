@@ -75,13 +75,6 @@ class TestSuite:
             tc.setAttribute('timestamp', self.iso_time)
         if 'duration' in result:
             tc.setAttribute('time', str(result['duration']))
-        if 'oetags' in result:
-            properties = self.doc.createElement('properties')
-            oetags = self.doc.createElement('property')
-            oetags.setAttribute('name', 'oetags')
-            oetags.setAttribute('value', str(result['oetags']))
-            properties.appendChild(oetags)
-            tc.appendChild(properties)
         status = result['status']
         if status == 'FAILED':
             extra = self.doc.createElement('failure')
